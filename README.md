@@ -217,6 +217,15 @@ register_shutdown_function(fn() => Jobviz::stop());
 - Guzzle HTTP >= 7.0
 - One of: Laravel 10+/11+ or Symfony 6+/7+ (or a custom provider)
 
+## Documentation
+
+Full documentation is available at [jobviz.dev/docs](https://jobviz.dev/docs).
+
+- [Getting Started](https://jobviz.dev/docs/getting-started)
+- [PHP SDK Reference](https://jobviz.dev/docs/php-sdk)
+- [Custom Integration](https://jobviz.dev/docs/custom-integration)
+- [Examples](https://jobviz.dev/docs/examples)
+
 ## License
 
 [MIT](LICENSE)

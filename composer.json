@@ -4,6 +4,11 @@
     "type": "library",
     "license": "MIT",
     "keywords": ["queue", "monitoring", "laravel", "symfony", "jobs", "observability"],
+    "homepage": "https://jobviz.dev",
+    "support": {
+        "docs": "https://jobviz.dev/docs",
+        "issues": "https://github.com/Allbertss/jobviz-agent-php/issues"
+    },
     "require": {
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.0"
