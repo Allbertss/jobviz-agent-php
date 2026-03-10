@@ -1,0 +1,35 @@
+includes:
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+
+parameters:
+    level: 8
+    paths:
+        - src
+    tmpDir: .phpstan.cache
+    reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        # Laravel event classes have properties that vary by version
+        - '#Access to an undefined property Illuminate\\Queue\\Events\\#'
+        - '#Call to an undefined method Illuminate\\Queue\\Events\\#'
+        - '#Property Illuminate\\Queue\\Events\\.*on left side of \?\? is not nullable#'
+        - '#Property Illuminate\\Queue\\Events\\.*in isset\(\) is not nullable#'
+        - '#Call to function property_exists\(\) with Illuminate\\Queue\\Events\\#'
+        # Listeners stored for lifecycle reference even though not read back
+        - '#Property Jobviz\\Agent\\Providers\\LaravelQueueProvider::\$listeners is never read#'
+        # Queue method return nullability varies by driver at runtime
+        -
+            identifier: nullCoalesce.expr
+            path: src/Providers/LaravelQueueProvider.php
+        -
+            identifier: notIdentical.alwaysTrue
+            path: src/Providers/LaravelQueueProvider.php
+        # JobQueued::$job is object|string — we handle both at runtime
+        -
+            identifier: argument.type
+            path: src/Providers/LaravelQueueProvider.php
+            message: '#resolveQueueName#'
+        # Service provider singleton can return null but container types it as the class
+        -
+            identifier: instanceof.alwaysTrue
+            path: src/Laravel/JobvizServiceProvider.php

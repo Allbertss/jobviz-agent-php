@@ -1,0 +1,63 @@
+{
+    "name": "jobviz/agent",
+    "description": "Lightweight agent SDK for monitoring Laravel Queue, Symfony Messenger, and custom PHP queue jobs with Jobviz",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["queue", "monitoring", "laravel", "symfony", "jobs", "observability"],
+    "require": {
+        "php": "^8.1",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "require-dev": {
+        "laravel/framework": "^10.0|^11.0",
+        "php-cs-fixer/shim": "^3.94",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpunit/phpunit": "^10.0",
+        "symfony/messenger": "^6.0|^7.0"
+    },
+    "suggest": {
+        "laravel/framework": "Required for the Laravel Queue provider (^10.0|^11.0)",
+        "symfony/messenger": "Required for the Symfony Messenger provider (^6.0|^7.0)"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jobviz\\Agent\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Jobviz\\Agent\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Jobviz\\Agent\\Laravel\\JobvizServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "analyse": "phpstan analyse",
+        "cs-check": "php-cs-fixer fix --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix",
+        "ci": [
+            "@cs-check",
+            "@analyse",
+            "@test"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-cs-fixer/shim": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
